@@ -22,12 +22,14 @@ import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import {MatMenuModule} from "@angular/material/menu";
 import { HeaderComponent } from './header/header.component';
+import { SaveVideoDetailsComponent } from './save-video-details/save-video-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadVideoComponent,
-    HeaderComponent
+    HeaderComponent,
+    SaveVideoDetailsComponent
   ],
   imports: [
     BrowserModule,
