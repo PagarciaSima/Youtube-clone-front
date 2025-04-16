@@ -21,11 +21,13 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import {MatMenuModule} from "@angular/material/menu";
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UploadVideoComponent
+    UploadVideoComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
