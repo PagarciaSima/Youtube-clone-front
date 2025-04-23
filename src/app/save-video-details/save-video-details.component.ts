@@ -5,6 +5,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {ActivatedRoute} from "@angular/router";
 import {VideoService} from "../video.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { VideoDto } from '../video-dto';
 
 @Component({
   selector: 'app-save-video-details',
@@ -72,13 +73,23 @@ export class SaveVideoDetailsComponent {
 
   onUpload() {
     this.videoService.uploadThumbnail(this.selectedFile, this.videoId)
-      .subscribe(() => {
-        // show an upload success notification.
+    .subscribe({
+      next: () => {
         this.matSnackBar.open("Thumbnail Upload Successful", "OK");
-      })
+      },
+      error: (err) => {
+        console.error("Error uploading thumbnail:", err);
+        const snackBarRef = this.matSnackBar.open("Error uploading thumbnail", "Retry");
+        snackBarRef.onAction().subscribe(() => {
+          this.onUpload(); 
+        });
+      }
+    });
+
   }
 
- /*  saveVideo() {
+
+  saveVideo() {
     // Call the video service to make a http call to our backend
     const videoMetaData: VideoDto = {
       "id": this.videoId,
@@ -94,6 +105,6 @@ export class SaveVideoDetailsComponent {
     }
     this.videoService.saveVideo(videoMetaData).subscribe(data => {
       this.matSnackBar.open("Video Metadata Updated successfully", "OK");
-    })
-  } */
+    });
+  }
 }
