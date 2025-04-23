@@ -17,7 +17,6 @@ export class SaveVideoDetailsComponent {
   title: FormControl = new FormControl('');
   description: FormControl = new FormControl('');
   videoStatus: FormControl = new FormControl('');
-
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -31,26 +30,28 @@ export class SaveVideoDetailsComponent {
   thumbnailUrl!: string;
 
   constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService,
-    private matSnackBar: MatSnackBar) {
-    
+              private matSnackBar: MatSnackBar) {
     this.videoId = this.activatedRoute.snapshot.params.videoId;
-   /*  this.videoService.getVideo(this.videoId).subscribe(data => {
+    this.videoService.getVideo(this.videoId).subscribe(data => {
       this.videoUrl = data.videoUrl;
       this.thumbnailUrl = data.thumbnailUrl;
-    }); */
-
+    })
     this.saveVideoDetailsForm = new FormGroup({
       title: this.title,
       description: this.description,
       videoStatus: this.videoStatus,
-    });
+    })
   }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
+
+    // Add our fruit
     if (value) {
       this.tags.push(value);
     }
+
+    // Clear the input value
     event.chipInput!.clear();
   }
 
@@ -63,18 +64,13 @@ export class SaveVideoDetailsComponent {
   }
 
   onFileSelected(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-  
-    if (inputElement?.files?.length) {
-      this.selectedFile = inputElement.files[0];
-      this.selectedFileName = this.selectedFile.name;
-      this.fileSelected = true;
-    }
+    // @ts-ignore
+    this.selectedFile = event.target.files[0];
+    this.selectedFileName = this.selectedFile.name;
+    this.fileSelected = true;
   }
-  
 
   onUpload() {
-    console.log("onUpload")
     this.videoService.uploadThumbnail(this.selectedFile, this.videoId)
       .subscribe(() => {
         // show an upload success notification.
