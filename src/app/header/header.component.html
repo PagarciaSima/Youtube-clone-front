@@ -7,7 +7,7 @@
               aria-label="Example icon-button with heart icon">
         <mat-icon>video_call</mat-icon>
       </button>
-      <button [matMenuTriggerFor]="menu" mat-icon-button class="example-icon"
+      <button *ngIf="isAuhtenticated; else noAuth" [matMenuTriggerFor]="menu" mat-icon-button class="example-icon"
             aria-label="Example icon-button with share icon"
       >
         <mat-icon>account_circle</mat-icon>
@@ -16,7 +16,7 @@
         <button mat-menu-item >Logout</button>
       </mat-menu>
       <ng-template #noAuth>
-        <button mat-raised-button >Login</button>
+        <button mat-raised-button (click)="login()">Login</button>
       </ng-template>
     </mat-toolbar-row>
   </mat-toolbar>
