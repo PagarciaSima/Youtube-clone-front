@@ -15,11 +15,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.oidcSecurityService.isAuthenticated$.subscribe(({ isAuthenticated }) => {
       this.isAuhtenticated = isAuthenticated;
+      const token = this.oidcSecurityService.getAccessToken();
+    console.log(token);
     });
   }
 
   login() {
     this.oidcSecurityService.authorize();
+    
   }
 
   logout() {

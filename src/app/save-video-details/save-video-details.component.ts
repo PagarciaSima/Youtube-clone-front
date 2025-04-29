@@ -14,7 +14,7 @@ import { VideoDto } from '../video-dto';
 })
 export class SaveVideoDetailsComponent {
 
-  saveVideoDetailsForm: FormGroup;
+  saveVideoDetailsForm!: FormGroup;
   title: FormControl = new FormControl('');
   description: FormControl = new FormControl('');
   videoStatus: FormControl = new FormControl('');
@@ -33,15 +33,23 @@ export class SaveVideoDetailsComponent {
   constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService,
               private matSnackBar: MatSnackBar) {
     this.videoId = this.activatedRoute.snapshot.params.videoId;
-    this.videoService.getVideo(this.videoId).subscribe(data => {
-      this.videoUrl = data.videoUrl;
-      this.thumbnailUrl = data.thumbnailUrl;
-    })
+    this.getVideoById();
+    this.setForm();
+  }
+
+  private setForm() {
     this.saveVideoDetailsForm = new FormGroup({
       title: this.title,
       description: this.description,
       videoStatus: this.videoStatus,
-    })
+    });
+  }
+
+  private getVideoById() {
+    this.videoService.getVideo(this.videoId).subscribe(data => {
+      this.videoUrl = data.videoUrl;
+      this.thumbnailUrl = data.thumbnailUrl;
+    });
   }
 
   add(event: MatChipInputEvent): void {
