@@ -7,12 +7,15 @@ import { HomeComponent } from './home/home.component';
 import { LikedVideosComponent } from './liked-videos/liked-videos.component';
 import { HistoryComponent } from './history/history.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
+import { FeaturedComponent } from './featured/featured.component';
 
 const routes: Routes = [
   {
     path: '', component: HomeComponent,
     children: [
-
+      {
+        path: 'featured', component: FeaturedComponent,
+      },
       {
         path: 'subscriptions', component: SubscriptionsComponent,
       },
