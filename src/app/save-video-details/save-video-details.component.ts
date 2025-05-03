@@ -73,10 +73,12 @@ export class SaveVideoDetailsComponent {
   }
 
   onFileSelected(event: Event) {
-    // @ts-ignore
-    this.selectedFile = event.target.files[0];
-    this.selectedFileName = this.selectedFile.name;
-    this.fileSelected = true;
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      this.selectedFileName = this.selectedFile.name;
+      this.fileSelected = true;
+    }
   }
 
   onUpload() {

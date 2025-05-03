@@ -1,4 +1,5 @@
 export interface VideoDto {
+    createdAt?: string;
     id: string;
     title: string;
     description: string;

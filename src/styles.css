@@ -2,3 +2,24 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  app-root {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav-content {
+    padding: 16px;
+    overflow-y: auto;
+  }
