@@ -8,6 +8,7 @@
   }
   
   .subtitles{
+    margin-left: 8px;
     justify-content: space-between;
   }
   
@@ -20,11 +21,13 @@
   }
   
   .subscribe-button {
+    margin-top: 16px;
     height: 40px;
     justify-content: right;
   }
   
   .subscribe-button-clicked {
+    margin-top: 16px;
     background-color: gray;
     height: 40px;
   }

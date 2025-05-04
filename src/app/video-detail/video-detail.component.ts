@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VideoService } from '../video.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-video-detail',
@@ -9,7 +10,7 @@ import { VideoService } from '../video.service';
 })
 export class VideoDetailComponent implements OnInit {
   showSubscribeButton: boolean = true;
-  showUnSubscribeButton: boolean = true;
+  showUnSubscribeButton: boolean = false;
 
   videoId!: string;
   videoUrl!: string;
@@ -24,7 +25,8 @@ export class VideoDetailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private videoService: VideoService
+    private videoService: VideoService,
+    private userService: UserService
   ) {
     this.videoId = this.activatedRoute.snapshot.params.videoId;
     this.getVideoById();
@@ -50,9 +52,17 @@ export class VideoDetailComponent implements OnInit {
   }
 
   unSubscribeToUser() {
+    let userId = this.userService.getUserId();
+    this.userService.unSubscribeUser(userId);
+    this.showSubscribeButton = true;
+    this.showUnSubscribeButton = false;
   }
 
   subscribeToUser() {
+    let userId = this.userService.getUserId();
+    this.userService.subscribeToUser(userId);
+    this.showSubscribeButton = false;
+    this.showUnSubscribeButton = true;
   }
 
   likeVideo() {

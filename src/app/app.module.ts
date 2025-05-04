@@ -39,6 +39,7 @@ import { LikedVideosComponent } from './liked-videos/liked-videos.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FeaturedComponent } from './featured/featured.component';
 import { VideoCardComponent } from './video-card/video-card.component';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { VideoCardComponent } from './video-card/video-card.component';
     SidebarComponent,
     FeaturedComponent,
     VideoCardComponent,
+    CallbackComponent,
   ],
   imports: [
     BrowserModule,
