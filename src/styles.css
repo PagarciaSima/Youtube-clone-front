@@ -22,4 +22,13 @@ body {
   .sidenav-content {
     padding: 16px;
     overflow-y: auto;
+    min-height: 100vh;
+  }
+
+  app-save-video-details, .ngx-file-drop__drop-zone {
+    margin-top: 32px;
+  }
+
+  .mat-card {
+    margin-top: 16px;
   }

@@ -20,7 +20,7 @@ export class FeaturedComponent implements OnInit {
       next: (data) => {
         this.featuredVideos = data;
       }
-    })
+    });
   }
 
 }

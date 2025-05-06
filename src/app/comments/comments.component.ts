@@ -56,6 +56,7 @@ export class CommentsComponent implements OnInit {
       next: () => {
         this.matSnackBar.open("Comment Posted Successfully", "OK");
         this.commentsForm.get('comment')?.reset();
+        this.getAllComments();
       },
       error: (err) => {
         console.error("Error while posting the comment", err);

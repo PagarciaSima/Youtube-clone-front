@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VideoDto } from '../video-dto';
+import { VideoService } from '../video.service';
 
 @Component({
   selector: 'app-history',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  historyVideos: Array<VideoDto> = []
+
+  constructor(
+    private videoService: VideoService
+  ) { }
 
   ngOnInit(): void {
+    this.videoService.getVideoHistory().subscribe({
+      next: (data) => {
+        this.historyVideos = data;
+      }
+    });
   }
-
 }

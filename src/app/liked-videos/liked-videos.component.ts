@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VideoDto } from '../video-dto';
+import { VideoService } from '../video.service';
 
 @Component({
   selector: 'app-liked-videos',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LikedVideosComponent implements OnInit {
 
-  constructor() { }
+  likedVideos: Array<VideoDto> = []
+
+  constructor(
+    private videoService: VideoService
+  ) { }
 
   ngOnInit(): void {
+    this.videoService.getLikedVideos().subscribe({
+      next: (data) => {
+        this.likedVideos = data;
+      }
+    });
   }
 
 }
