@@ -1,28 +1,40 @@
-<div class="center">
-    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
-                   (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)"
+<div class="file-upload-container">
+  <section class="drop-zone">
+    <ngx-file-drop 
+      dropZoneLabel="Drop files here" 
+      (onFileDrop)="dropped($event)"
+      (onFileOver)="fileOver($event)" 
+      (onFileLeave)="fileLeave($event)"
     >
       <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-            Drag and Drop Videos in this section (or) .
-        <button type="button" (click)="openFileSelector()">Browse Files</button>
+        <div class="drop-content">
+          <p>Drag and Drop Videos into this section (or)</p>
+          <button type="button" (click)="openFileSelector()" aria-label="Browse files to upload">
+            Browse Files
+          </button>
+        </div>
       </ng-template>
     </ngx-file-drop>
-    
-    <div class="upload-table">
-      <table class="table">
-        <thead>
+  </section>
+
+  <!-- Files Table -->
+  <div class="upload-table-container">
+    <table class="table">
+      <thead>
         <tr>
           <th>Name</th>
         </tr>
-        </thead>
-        <tbody class="upload-name-style">
-        <tr *ngFor="let item of files; let i=index">
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of files; let i = index">
           <td><strong>{{ item.relativePath }}</strong></td>
         </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <button mat-button (click)="uploadVideo()" *ngIf="fileUploaded">Upload Video</button>
-  
+      </tbody>
+    </table>
   </div>
+
+  <!-- Upload Button -->
+  <button mat-button (click)="uploadVideo()" *ngIf="fileUploaded" class="upload-btn">
+    Upload Video
+  </button>
+</div>
