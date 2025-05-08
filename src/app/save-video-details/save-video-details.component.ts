@@ -5,7 +5,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {ActivatedRoute} from "@angular/router";
 import {VideoService} from "../video.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import { VideoDto } from '../video-dto';
+import {VideoDto} from "../video-dto";
 
 @Component({
   selector: 'app-save-video-details',
@@ -14,7 +14,7 @@ import { VideoDto } from '../video-dto';
 })
 export class SaveVideoDetailsComponent {
 
-  saveVideoDetailsForm!: FormGroup;
+  saveVideoDetailsForm: FormGroup;
   title: FormControl = new FormControl('');
   description: FormControl = new FormControl('');
   videoStatus: FormControl = new FormControl('');
@@ -33,23 +33,15 @@ export class SaveVideoDetailsComponent {
   constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService,
               private matSnackBar: MatSnackBar) {
     this.videoId = this.activatedRoute.snapshot.params.videoId;
-    this.getVideoById();
-    this.setForm();
-  }
-
-  private setForm() {
+    this.videoService.getVideo(this.videoId).subscribe(data => {
+      this.videoUrl = data.videoUrl;
+      this.thumbnailUrl = data.thumbnailUrl;
+    })
     this.saveVideoDetailsForm = new FormGroup({
       title: this.title,
       description: this.description,
       videoStatus: this.videoStatus,
-    });
-  }
-
-  private getVideoById() {
-    this.videoService.getVideo(this.videoId).subscribe(data => {
-      this.videoUrl = data.videoUrl;
-      this.thumbnailUrl = data.thumbnailUrl;
-    });
+    })
   }
 
   add(event: MatChipInputEvent): void {
@@ -73,31 +65,19 @@ export class SaveVideoDetailsComponent {
   }
 
   onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-      this.selectedFileName = this.selectedFile.name;
-      this.fileSelected = true;
-    }
+    // @ts-ignore
+    this.selectedFile = event.target.files[0];
+    this.selectedFileName = this.selectedFile.name;
+    this.fileSelected = true;
   }
 
   onUpload() {
     this.videoService.uploadThumbnail(this.selectedFile, this.videoId)
-    .subscribe({
-      next: () => {
+      .subscribe(() => {
+        // show an upload success notification.
         this.matSnackBar.open("Thumbnail Upload Successful", "OK");
-      },
-      error: (err) => {
-        console.error("Error uploading thumbnail:", err);
-        const snackBarRef = this.matSnackBar.open("Error uploading thumbnail", "Retry");
-        snackBarRef.onAction().subscribe(() => {
-          this.onUpload(); 
-        });
-      }
-    });
-
+      })
   }
-
 
   saveVideo() {
     // Call the video service to make a http call to our backend
@@ -115,6 +95,6 @@ export class SaveVideoDetailsComponent {
     }
     this.videoService.saveVideo(videoMetaData).subscribe(data => {
       this.matSnackBar.open("Video Metadata Updated successfully", "OK");
-    });
+    })
   }
 }
