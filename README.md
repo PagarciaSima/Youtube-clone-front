@@ -1,27 +1,73 @@
-# YoutubeCloneUi
+# YouTube Clone Application 💻
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.18.
+This is a basic full-stack YouTube clone application that allows users to upload, view, and interact with video content. It includes features such as authentication, video uploads to AWS S3, and metadata storage in Mongo db. Users can also subscribe / unsubscribe to users, like or dislike videos, and manage their video history and liked videos.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Backend Repository 🔗
 
-## Code scaffolding
+The backend of the application is built with Java Springboot and can be found at:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+[Backend Repository - Springboot](https://github.com/PagarciaSima/Youtube-clone-Back)
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🛠️ Features
 
-## Running unit tests
+- 🔐 Authentication with OAuth2 (Auth0)
+- 🔑 JWT-based session management.
+- 👍👎 Like and dislike videos.
+- 📤 Upload videos and metadata / thumbnail to AWS S3.
+- 🎥 Preview and play videos.
+- ➕➖ Subscribe and unsubscribe from users.
+- 📜 View all uploaded videos, watch history, and liked videos.
+- 🗂️ List of all liked videos.
+- Add / delete comments
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## ⚙️ Technologies
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Backend (Spring Boot 3.4.0 / Java 17)
+- **Spring Boot 3.4.0** (Main framework)
+- **Spring Web** (REST API development)
+- **Spring Data JPA** (Database access with Hibernate)
+- **Spring Security & JWT** (Authentication & Authorization)
+- **Mongo DB**
+- **Lombok** (Boilerplate code reduction)
+- **Oauth2 resource server
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Frontend (Angular 12)
+- **Angular 12** (Core framework)
+- **📦 Angular Material** (UI components & styling)
+- **📦 Flex Layout (Responsive grid design)
+- **📦 Videogular (Video playback)
+- **📦 OIDC Client (OAuth2 and OIDC authentication)
+- **📦 Ngx File Drop (Drag and drop file uploads)
+- **📦 RxJS (Reactive programming with observables)
+- **📦 ngx-file-drop (^11.1.0)
+
+---
+
+## Interfaces 🖥️
+
+### Login
+![login](img/login.png)
+
+### Home
+![home](img/home.png)
+
+### Video Upload
+![Video upload](img/video-upload.png)
+
+### Save details
+![Save details](img/save-details.png)
+
+### Video details
+![Video details](img/video-details.png)
+
+### AWS / S3 Storage
+![AWS / S3 Storage](img/aws_storage.png)
+
